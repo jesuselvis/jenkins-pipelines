@@ -1,9 +1,9 @@
 // @Library('jenkins-library@master')_
 
 pipeline {
-    agent {
-        label 'master'
-    }
+    // agent {
+    //     label 'master'
+    // }
 
     environment {
         SRC_PROJECT 	= 'dataplatform'
