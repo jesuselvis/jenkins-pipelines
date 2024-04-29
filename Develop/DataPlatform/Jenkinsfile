@@ -1,6 +1,7 @@
 // @Library('jenkins-library@master')_
 
 pipeline {
+    agent  any
     // agent {
     //     label 'master'
     // }
