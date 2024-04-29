@@ -1,0 +1,58 @@
+// @Library('jenkins-library@master')_
+
+pipeline {
+    agent {
+        label 'master'
+    }
+
+    environment {
+        SRC_PROJECT 	= 'dataplatform'
+        //SRC_REPO_URL 	= "${GIT_SERVER}/losandes-development/"
+        SVC_FOLDER		= 'losandes-development/dataplatform'
+        SVC_NAME		= 'dataplatform'
+        BRANCH 			= 'develop'
+    }
+
+    stages {
+    	stage ('Prepare') {
+            steps {
+				sh 'echo "Prepare"'	
+            }
+        }
+
+        stage ('AWS Init') {
+            steps {
+				sh 'echo "AWS Init"'	
+            }
+        }
+
+        stage ('AWS Plan') {
+            steps {
+				sh 'echo "AWS Plan"'	
+            }
+        }
+
+        stage ('AWS Checkov') {
+            steps {
+                sh 'echo "AWS Checkov"'	
+            }
+        }
+
+        stage ('AWS Infra Cost') {
+            steps {
+                sh 'echo "AWS Infra Cost"'	
+            }
+        }
+
+        stage ('AWS Apply') {
+            steps {
+                sh 'echo "AWS Apply"'
+            }
+        }
+    }
+	post {
+	    always {
+		    cleanWs()
+	    }
+    }
+}
