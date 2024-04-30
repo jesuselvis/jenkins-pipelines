@@ -1,4 +1,5 @@
 @Library('jenkins-library@main')_
+def _gitHandler = new GitHandler()
 
 pipeline {
     // agent  any
@@ -11,8 +12,7 @@ pipeline {
         //SRC_REPO_URL 	= "${GIT_SERVER}/losandes-development/"
         SVC_FOLDER		= 'losandes-development/dataplatform'
         SVC_NAME		= 'dataplatform'
-        BRANCH 			= 'develop'
-        GitHandler      = new GitHandler()
+        BRANCH 			= 'develop'        
     }
 
     stages {
