@@ -15,10 +15,10 @@ pipeline {
     stages {
     	stage ('Prepare') {
             steps {
-				//script {
+				script {
 					_gitHandler.Checkout(repository=GIT_AWS_SRC_DEPLOY, source=GIT_AWS_SRC_WORKDIR, branch=GIT_AWS_SRC_BRANCH)
                     version = 'latest'
-				//}	
+				}	
             }
         }
 
