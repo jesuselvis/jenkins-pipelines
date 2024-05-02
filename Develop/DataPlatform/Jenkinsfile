@@ -2,23 +2,23 @@
 def _gitHandler = new GitHandler()
 
 pipeline {
-    // agent  any
     agent {
         label 'master'
     }
 
-    environment {
-        SRC_PROJECT 	= 'dataplatform'
-        //SRC_REPO_URL 	= "${GIT_SERVER}/losandes-development/"
-        SVC_FOLDER		= 'losandes-development/dataplatform'
-        SVC_NAME		= 'dataplatform'
-        BRANCH 			= 'develop'        
+    environment {        
+        GIT_AWS_SRC_DEPLOY  = "${GIT_AWS_IAC_DATAPLATFORM}"
+        GIT_AWS_SRC_WORKDIR = '.'
+        GIT_AWS_SRC_BRANCH 	= 'develop'        
     }
 
     stages {
     	stage ('Prepare') {
             steps {
-				sh 'echo "Prepare"'	
+				script {
+					_gitHandler.Checkout(repository=GIT_AWS_SRC_DEPLOY, source=GIT_AWS_SRC_WORKDIR, branch=GIT_AWS_SRC_BRANCH)
+                    version = 'latest'
+				}	
             }
         }
 
