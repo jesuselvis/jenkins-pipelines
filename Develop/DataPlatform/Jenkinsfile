@@ -7,16 +7,17 @@ pipeline {
 
     environment {        
         GIT_AWS_SRC_DEPLOY  = "${GIT_AWS_IAC_DATAPLATFORM}"
-        GIT_AWS_SRC_WORKDIR = '.'
-        GIT_AWS_SRC_BRANCH 	= 'main'        
+        GIT_AWS_SRC_BRANCH 	= 'main'
+        GIT_AWS_BACKEND_NAME = 'backend.ft'
+        GIT_AWS_BACKEND_DIR = 'Develop/DataPlatform'
     }
 
     stages {
     	stage ('Prepare') {
             steps {
 				script {
-					gitHandlerLibrary.checkout(repository=GIT_AWS_SRC_DEPLOY, source=GIT_AWS_SRC_WORKDIR, branch=GIT_AWS_SRC_BRANCH)
-                    terraformHandlerLibrary.createAwsBackend(backendName="backend")
+                    //terraformHandlerLibrary.createAwsBackend(backendDir=GIT_AWS_BACKEND_DIR+'/'+GIT_AWS_BACKEND_NAME)
+					gitHandlerLibrary.checkout(repository=GIT_AWS_SRC_DEPLOY, branch=GIT_AWS_SRC_BRANCH)                    
                     version = 'latest'
 				}
                 sh 'ls -l'
