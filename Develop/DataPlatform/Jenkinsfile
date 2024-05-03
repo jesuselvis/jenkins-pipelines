@@ -16,6 +16,7 @@ pipeline {
             steps {
 				script {
 					gitHandlerLibrary.checkout(repository=GIT_AWS_SRC_DEPLOY, source=GIT_AWS_SRC_WORKDIR, branch=GIT_AWS_SRC_BRANCH)
+                    terraformHandlerLibrary.createAwsBackend(backendName="backend")
                     version = 'latest'
 				}
                 sh 'ls -l'
