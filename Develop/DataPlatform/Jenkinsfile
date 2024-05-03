@@ -26,6 +26,7 @@ pipeline {
             steps {
 				script{
                     terraformHandlerLibrary.createAwsBackend(backendDir=GIT_AWS_BACKEND_DIR+'/'+GIT_AWS_BACKEND_NAME)
+                    terraformHandlerLibrary.initialize()
                 }	
             }
         }
