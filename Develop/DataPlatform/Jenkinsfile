@@ -8,7 +8,7 @@ pipeline {
     environment {        
         GIT_AWS_SRC_DEPLOY  = "${GIT_AWS_IAC_DATAPLATFORM}"
         GIT_AWS_SRC_WORKDIR = '.'
-        GIT_AWS_SRC_BRANCH 	= 'develop'        
+        GIT_AWS_SRC_BRANCH 	= 'main'        
     }
 
     stages {
@@ -17,7 +17,8 @@ pipeline {
 				script {
 					gitHandlerLibrary.checkout(repository=GIT_AWS_SRC_DEPLOY, source=GIT_AWS_SRC_WORKDIR, branch=GIT_AWS_SRC_BRANCH)
                     version = 'latest'
-				}	
+				}
+                sh 'ls -l'
             }
         }
 
