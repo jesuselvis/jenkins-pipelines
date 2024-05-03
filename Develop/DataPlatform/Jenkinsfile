@@ -15,18 +15,18 @@ pipeline {
     stages {
     	stage ('Prepare') {
             steps {
-				script {
-                    //terraformHandlerLibrary.createAwsBackend(backendDir=GIT_AWS_BACKEND_DIR+'/'+GIT_AWS_BACKEND_NAME)
+				script {                    
 					gitHandlerLibrary.checkout(repository=GIT_AWS_SRC_DEPLOY, branch=GIT_AWS_SRC_BRANCH)                    
                     version = 'latest'
 				}
-                sh 'ls -l'
             }
         }
 
         stage ('AWS Init') {
             steps {
-				sh 'echo "AWS Init"'	
+				script{
+                    terraformHandlerLibrary.createAwsBackend(backendDir=GIT_AWS_BACKEND_DIR+'/'+GIT_AWS_BACKEND_NAME)
+                }	
             }
         }
 
