@@ -8,7 +8,7 @@ pipeline {
     environment {        
         GIT_AWS_SRC_DEPLOY  = "${GIT_AWS_IAC_DATAPLATFORM}"
         GIT_AWS_SRC_BRANCH 	= 'main'
-        GIT_AWS_BACKEND_NAME = 'backend.ft'
+        GIT_AWS_BACKEND_NAME = 'backend.tf'
         GIT_AWS_BACKEND_DIR = 'Develop/DataPlatform'
     }
 
