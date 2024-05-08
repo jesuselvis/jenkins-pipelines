@@ -8,8 +8,9 @@ pipeline {
     environment {        
         GIT_AWS_SRC_DEPLOY  = "${GIT_AWS_IAC_DATAPLATFORM}"
         GIT_AWS_SRC_BRANCH 	= 'main'
-        GIT_AWS_BACKEND_NAME = 'backend.tf'
-        GIT_AWS_BACKEND_DIR = 'Develop/DataPlatform'
+        TF_BACKEND_BUCKET   = 'devops-iac-dev-jenkins-tfstates'
+        TF_BACKEND_KEY      = 'dataplatform/terraform.tfstate'
+        TF_BACKEND_ACCESS_ID= 'AWS_TFSTATES__BACKEND_ACCOUNT'
     }
 
     stages {
@@ -25,7 +26,7 @@ pipeline {
         stage ('AWS Init') {
             steps {
 				script{
-                    terraformHandlerLibrary.createAwsBackend(backendDir=GIT_AWS_BACKEND_DIR+'/'+GIT_AWS_BACKEND_NAME)
+                    terraformHandlerLibrary.createAwsBackend(_bucketName=TF_BACKEND_BUCKET, _bucketKey=TF_BACKEND_KEY, _credentials=TF_BACKEND_ACCESS_ID)
                     terraformHandlerLibrary.initialize()
                 }	
             }
