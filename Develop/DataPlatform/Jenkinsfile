@@ -54,8 +54,10 @@ pipeline {
         }
 
         stage ('AWS Apply') {
-            steps {
-                sh 'echo "AWS Apply"'
+            steps {                
+                script{                    
+                    terraformHandlerLibrary.applyAws(_accountToDeploy=AWS_ACCOUNT_DEPLOY, _ymlFile=TF_ENV_FILE)
+                }
             }
         }
     }
