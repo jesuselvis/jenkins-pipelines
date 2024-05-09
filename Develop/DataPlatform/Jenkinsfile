@@ -10,6 +10,8 @@ pipeline {
         GIT_AWS_SRC_BRANCH 	= 'main'
         TF_BACKEND_BUCKET_KEY = 'dataplatform/terraform.tfstate'
         ENVIRONMENT         = 'develop'
+        TF_ENV_FILE         = 'Develop/DataPlatform/env.yml'
+        AWS_ACCOUNT_DEPLOY  = 'accountDigitalDev'
     }
 
     stages {
@@ -26,7 +28,7 @@ pipeline {
             steps {
 				script{
                     terraformHandlerLibrary.createAwsBackend(_bucketKey=TF_BACKEND_BUCKET_KEY, _environment=ENVIRONMENT)
-                    terraformHandlerLibrary.initialize()
+                    terraformHandlerLibrary.initializeAws()
                 }	
             }
         }
@@ -34,7 +36,7 @@ pipeline {
         stage ('AWS Plan') {
             steps {
 				script{                    
-                    terraformHandlerLibrary.plan()
+                    terraformHandlerLibrary.planAws(_accountToDeploy=AWS_ACCOUNT_DEPLOY, _ymlFile=TF_ENV_FILE)
                 }	
             }
         }
