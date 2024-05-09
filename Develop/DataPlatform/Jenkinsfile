@@ -33,7 +33,9 @@ pipeline {
 
         stage ('AWS Plan') {
             steps {
-				sh 'echo "AWS Plan"'	
+				script{                    
+                    terraformHandlerLibrary.plan()
+                }	
             }
         }
 
